@@ -8,14 +8,14 @@
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square\&logo=mysql\&logoColor=white)
 ![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat-square\&logo=redis\&logoColor=white)
 
-> Backend development portfolio based on Spring Boot
+> Spring Boot backend study projects covering MVC, JPA, and authentication
 
 <br>
 
-Spring Boot를 중심으로 웹 애플리케이션 구조, 도메인 설계, 인증/인가까지   
+Spring Boot를 중심으로 웹 애플리케이션 구조, 도메인 설계, 인증/인가까지  
 백엔드 개발 과정을 단계적으로 학습하며 구현한 프로젝트들을 정리한 저장소입니다.
 
-이 저장소는 구름톤 유니브(9oormthonUNIV) 백엔드 스터디 과정에서 학습하며 구현한 프로젝트들을 정리한 것입니다.
+구름톤 유니브(9oormthonUNIV) 백엔드 스터디 과정에서 진행한 학습 내용을 기반으로 구성했습니다.
 
 ---
 
@@ -30,8 +30,8 @@ Spring Boot를 중심으로 웹 애플리케이션 구조, 도메인 설계, 인
 
 까지 이어지는 **백엔드 학습 흐름을 단계적으로 정리한 레포지토리**입니다.
 
-각 프로젝트는 독립적으로 구성되어 있으며,   
-기능과 구조를 점진적으로 확장하는 방식으로 학습을 진행했습니다.
+각 프로젝트는 독립적으로 구성되어 있으며,  
+기초 → 확장 → 보안 순서로 학습 범위를 넓혀가며 구현했습니다.
 
 ---
 
@@ -81,14 +81,12 @@ Spring Security 기반 JWT 인증/인가를 구현한 프로젝트입니다.
 
 ## Learning Focus
 
-이 저장소는 다음과 같은 흐름으로 학습을 진행합니다.
-
 * MVC 구조 이해
-* JPA 기반 CRUD 구현
-* 도메인 설계 및 서비스 로직 확장
+* Spring Data JPA 기반 CRUD 구현
+* 도메인 설계 및 계층 분리
 * Spring Security 인증/인가 적용
-* JWT 기반 Stateless 구조 이해
-* Redis 활용
+* JWT 기반 Stateless 인증 구조 이해
+* Redis 활용 기초 학습
 
 ---
 
