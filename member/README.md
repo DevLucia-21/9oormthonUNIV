@@ -50,15 +50,14 @@ member/
 │  ├─ entity/
 │  └─ dto/
 ├─ src/main/resources/
-│  ├─ templates/
-│  │  ├─ index.html
-│  │  ├─ login.html
-│  │  ├─ save.html
-│  │  ├─ list.html
-│  │  ├─ detail.html
-│  │  ├─ update.html
-│  │  └─ main.html
-│  └─ application.yml
+│  └─ templates/
+│     ├─ index.html
+│     ├─ login.html
+│     ├─ save.html
+│     ├─ list.html
+│     ├─ detail.html
+│     ├─ update.html
+│     └─ main.html
 └─ build.gradle
 ```
 
@@ -100,14 +99,12 @@ member/
 
 ## Considerations
 
-* **중복 제출 방지**
-
-  * `redirect:` 사용으로 새로고침 시 중복 요청 방지
-
 * **세션 기반 인증**
-
   * 로그인 시 세션에 사용자 이메일 저장
   * 로그아웃 시 `session.invalidate()`로 상태 초기화
+
+* **요청 처리 흐름 분리**
+  * 수정/삭제 처리에는 `redirect:`를 적용해 흐름을 분리했습니다.
 
 ---
 
