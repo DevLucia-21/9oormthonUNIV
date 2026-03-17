@@ -57,6 +57,11 @@ book/
 │  └─ PyeBookApplication.java
 ├─ src/main/resources/
 │  └─ templates/
+│     ├─ book/
+│     ├─ user/
+│     ├─ author/
+│     ├─ genre/
+│     └─ rental/
 ├─ build.gradle
 └─ README.md
 ```
