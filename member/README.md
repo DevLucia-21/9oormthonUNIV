@@ -1,126 +1,137 @@
-# Spring Boot + Thymeleaf 회원 관리 시스템
+# Spring Boot + Thymeleaf Member Management Project
 
-## 프로젝트 개요
+Spring Boot + Thymeleaf 기반의 회원 관리 학습 프로젝트입니다.
 
-이 프로젝트는 Spring Boot + Thymeleaf 기반의 학습용 웹 애플리케이션으로, 회원 가입·로그인·수정·탈퇴 등의 기본적인 사용자 관리 기능을 구현합니다.
-
----
-
-## 학습 목표
-
-- Spring Boot MVC 아키텍처 이해 및 프로젝트 셋업
-- Thymeleaf 폼 바인딩 및 서버-클라이언트 데이터 흐름 파악
-- Spring Data JPA 기반 엔티티 매핑 및 CRUD 구현
-- Controller → Service → Repository 계층 설계 및 역할 분리
+회원가입, 로그인, 조회, 수정, 삭제 등 기본적인 사용자 관리 기능을 구현했습니다.
 
 ---
 
-## 기술 스택
+## Overview
 
-| 분류        | 기술                             |
-|-------------|----------------------------------|
-| Language    | Java 17                          |
-| Framework   | Spring Boot 3.x                  |
-| Template    | Thymeleaf                        |
-| ORM         | Spring Data JPA (Hibernate)      |
-| Database    | MySQL                            |
-| Build Tool  | Gradle                           |
-| Test Tool   | JUnit 5, MockMvc                 |
-| IDE         | IntelliJ IDEA                    |
+이 프로젝트는 Spring Boot 기반 웹 애플리케이션의 전체 흐름을 이해하기 위해 진행한 학습용 프로젝트입니다.
+
+단순 기능 구현을 넘어, Controller → Service → Repository 계층 구조와   
+DTO ↔ Entity 변환, JPA 기반 데이터 처리, 세션 기반 로그인 흐름까지 직접 구현하는 데 초점을 두었습니다.
 
 ---
 
-## 디렉토리 구조
+## Learning Goals
 
-```text
+* Spring Boot MVC 구조 및 프로젝트 구성 이해
+* Thymeleaf 기반 서버 사이드 렌더링 흐름 이해
+* Spring Data JPA를 활용한 CRUD 구현
+* Controller → Service → Repository 계층 분리 설계
+
+---
+
+## Tech Stack
+
+| Category   | Technology                  |
+| ---------- | --------------------------- |
+| Language   | Java 17                     |
+| Framework  | Spring Boot 3.x             |
+| Template   | Thymeleaf                   |
+| ORM        | Spring Data JPA (Hibernate) |
+| Database   | MySQL                       |
+| Build Tool | Gradle                      |
+| IDE        | IntelliJ IDEA               |
+
+---
+
+## Directory Structure
+
+```text id="v7q3km"
 member/
 ├─ src/main/java/com/Yeeun/member/
-│  ├─ MemberApplication.java  # 메인 애플리케이션 클래스
+│  ├─ MemberApplication.java
 │  ├─ controller/
 │  ├─ service/
 │  ├─ repository/
 │  ├─ entity/
 │  └─ dto/
 ├─ src/main/resources/
-│  ├─ templates/  # Thymeleaf 뷰
-│  │  ├─ detail.html
+│  ├─ templates/
 │  │  ├─ index.html
-│  │  ├─ list.html
 │  │  ├─ login.html
-│  │  ├─ main.html
 │  │  ├─ save.html
-│  │  └─ update.html
+│  │  ├─ list.html
+│  │  ├─ detail.html
+│  │  ├─ update.html
+│  │  └─ main.html
 │  └─ application.yml
 └─ build.gradle
 ```
 
 ---
 
-## 주요 기능 요약
+## Key Features
 
 ### 회원 가입 & 로그인
-- `/member/save` : 회원가입 폼 및 가입 처리
-- `/member/login` : 로그인 폼 및 로그인 처리
+
+* `/member/save` : 회원가입 폼 및 가입 처리
+* `/member/login` : 로그인 폼 및 로그인 처리
+* 로그인 성공 시 `HttpSession`에 사용자 이메일 저장하여 인증 상태 유지
 
 ### 회원 목록 & 상세 조회
-- `/member/` : 전체 회원 목록 조회
-- `/member/{id}` : 회원 상세 조회
+
+* `/member/` : 전체 회원 목록 조회
+* `/member/{id}` : 회원 상세 조회
 
 ### 프로필 수정 & 탈퇴
-- `/member/update` : 프로필 수정 폼 및 수정 처리
-- `/member/delete/{id}` : 회원 삭제 처리
+
+* `/member/update` : 회원 정보 수정
+* `/member/delete/{id}` : 회원 삭제
 
 ### 기타 기능
-- `/member/logout` : 로그아웃 (세션 무효화)
-- `/member/email-check` : 이메일 중복 검사 (AJAX)
+
+* `/member/logout` : 로그아웃 (세션 무효화)
+* `/member/email-check` : 이메일 중복 검사 (AJAX)
 
 ---
 
-## 고려했던 점 & 해결 방법
+## Implementation Details
 
-- **폼 중복 제출 방지:** `redirect:` 적용으로 새로고침 시 재요청 방지
-- **유효성 검증:** `@Valid` + `BindingResult`로 입력값 검증 및 오류 처리
-- **세션 관리:** 로그인 후 세션에 사용자 정보 저장, 로그아웃 시 세션 무효화
-
----
-
-## 실행 방법
-
-1. MySQL 데이터베이스 생성
-   ```sql
-   CREATE DATABASE memberDB;
-   ```
-2. `application.yml`에 DB 접속 정보 입력
-   ```yaml
-   spring:
-     datasource:
-       url: jdbc:mysql://localhost:3306/memberDB
-       username: root
-       password: <YOUR_DB_PASSWORD>
-     jpa:
-       hibernate:
-         ddl-auto: update
-       show-sql: true
-   ```
-3. Gradle 빌드 및 실행
-   ```bash
-   ./gradlew clean bootRun
-   ```
-4. 브라우저에서 `http://localhost:8081` 접속
+* Controller에서 요청을 받아 Service로 비즈니스 로직 위임
+* Service에서 DTO ↔ Entity 변환 후 Repository 호출
+* Spring Data JPA의 `save()`, `findBy...()` 메서드를 활용한 데이터 처리
+* 로그인 상태는 `HttpSession`을 통해 관리
 
 ---
 
-## 향후 계획
+## Considerations
 
-- Spring Security 기반 인증·인가(ROLE_ADMIN / ROLE_USER)
-- 이메일 인증 및 비밀번호 찾기 기능 추가
-- REST API 형태로 확장 및 SPA 연동
+* **중복 제출 방지**
+
+  * `redirect:` 사용으로 새로고침 시 중복 요청 방지
+
+* **세션 기반 인증**
+
+  * 로그인 시 세션에 사용자 이메일 저장
+  * 로그아웃 시 `session.invalidate()`로 상태 초기화
 
 ---
 
-## 참고 자료
+## Limitations & Improvements
 
-- [Spring Boot 공식 문서](https://spring.io/projects/spring-boot)
-- [Thymeleaf 공식 가이드](https://www.thymeleaf.org/)
-- [Spring Data JPA 레퍼런스](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/)
-- [코딩레시피 - Spring Boot 회원 프로젝트(Youtube)](https://www.youtube.com/watch?v=RhM1bQ76Tv0&list=PLV9zd3otBRt5ANIjawvd-el3QU594wyx7)
+* 비밀번호 암호화 미적용 (보안 취약)
+* 입력값 검증 로직 부족
+* 예외 처리 및 사용자 피드백 개선 필요
+* 권한 분리(관리자/사용자) 미구현
+
+---
+
+## Future Plans
+
+* Spring Security 기반 인증/인가 적용
+* 비밀번호 암호화 적용
+* 이메일 인증 및 비밀번호 찾기 기능 추가
+* REST API 구조로 확장 후 프론트엔드 분리
+
+---
+
+## Notes
+
+이 프로젝트는 완성형 서비스보다는 회원 관리 기능을 중심으로    
+Spring Boot 웹 애플리케이션의 기본 구조를 이해하는 데 목적이 있습니다.
+
+이후 프로젝트에서는 보안, 구조 설계, 확장성을 고려한 방향으로 발전시키고 있습니다.
