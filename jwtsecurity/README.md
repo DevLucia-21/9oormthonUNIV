@@ -27,7 +27,7 @@ JWT 인증/인가 흐름을 직접 구현해보기 위한 학습용 프로젝트
 
 * JWT 기반 인증/인가 흐름 이해
 * Spring Security 필터 체인 구조 학습
-* Custom 인증 흐름과 AuthenticationManager 동작 이해
+* AuthenticationManager를 이용한 로그인 인증 흐름 이해
 * Redis를 활용한 TTL 저장 방식 실습
 
 ---
@@ -61,7 +61,6 @@ jwtsecurity/
 │  ├─ repository/
 │  ├─ service/
 │  └─ JwtsecurityApplication.java
-├─ src/test/java/com/pye/jwtsecurity/
 ├─ gradle/
 ├─ libs/
 ├─ build.gradle
@@ -130,7 +129,7 @@ jwtsecurity/
 * Refresh Token 발급 및 저장 기능 미구현
 * 로그아웃 및 토큰 블랙리스트 처리 미구현
 * 입력값 검증 및 예외 처리 보완 필요
-* Redis와 인증 구조 완전 통합 필요
+* Redis를 인증 토큰 관리(Refresh Token 저장, 블랙리스트 처리)와 연동하는 구조는 아직 미구현
 
 ---
 
